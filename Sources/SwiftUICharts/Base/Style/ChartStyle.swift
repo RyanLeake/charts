@@ -7,41 +7,48 @@ public class ChartStyle: ObservableObject {
 	public let backgroundColor: ColorGradient
 	/// colors for foreground fill of chart
     public let foregroundColor: [ColorGradient]
+    /// colors for comparison line
+    public let comparisonColor: Color?
+
 
 	/// Initialize with a single background color and an array of `ColorGradient` for the foreground
 	/// - Parameters:
 	///   - backgroundColor: a `Color`
 	///   - foregroundColor: array of `ColorGradient`
-    public init(backgroundColor: Color, foregroundColor: [ColorGradient]) {
+    public init(backgroundColor: Color, foregroundColor: [ColorGradient], comparisonColor: Color? = nil) {
         self.backgroundColor = ColorGradient.init(backgroundColor)
         self.foregroundColor = foregroundColor
+        self.comparisonColor = comparisonColor
     }
 
 	/// Initialize with a single background color and a single `ColorGradient` for the foreground
 	/// - Parameters:
 	///   - backgroundColor: a `Color`
 	///   - foregroundColor: a `ColorGradient`
-    public init(backgroundColor: Color, foregroundColor: ColorGradient) {
+    public init(backgroundColor: Color, foregroundColor: ColorGradient, comparisonColor: Color? = nil) {
         self.backgroundColor = ColorGradient.init(backgroundColor)
         self.foregroundColor = [foregroundColor]
+        self.comparisonColor = comparisonColor
     }
 
 	/// Initialize with a single background `ColorGradient` and a single `ColorGradient` for the foreground
 	/// - Parameters:
 	///   - backgroundColor: a `ColorGradient`
 	///   - foregroundColor: a `ColorGradient`
-    public init(backgroundColor: ColorGradient, foregroundColor: ColorGradient) {
+    public init(backgroundColor: ColorGradient, foregroundColor: ColorGradient, comparisonColor: Color? = nil) {
         self.backgroundColor = backgroundColor
         self.foregroundColor = [foregroundColor]
+        self.comparisonColor = comparisonColor
     }
 
 	/// Initialize with a  single background `ColorGradient` and an array of `ColorGradient` for the foreground
 	/// - Parameters:
 	///   - backgroundColor: a `ColorGradient`
 	///   - foregroundColor: array of `ColorGradient`
-    public init(backgroundColor: ColorGradient, foregroundColor: [ColorGradient]) {
+    public init(backgroundColor: ColorGradient, foregroundColor: [ColorGradient], comparisonColor: Color? = nil) {
         self.backgroundColor = backgroundColor
         self.foregroundColor = foregroundColor
+        self.comparisonColor = comparisonColor
     }
     
 }

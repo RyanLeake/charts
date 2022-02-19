@@ -2,8 +2,9 @@ import SwiftUI
 
 /// A single line of data, a view in a `LineChart`
 public struct Line: View {
-    @EnvironmentObject var chartValue: ChartValue
+    @ObservedObject var chartValue: ChartValue
     @ObservedObject var chartData: ChartData
+    @ObservedObject var comparisonChartData: ChartData
 
     var style: ChartStyle
 
@@ -15,6 +16,11 @@ public struct Line: View {
     var curvedLines: Bool = true
     var path: Path {
         Path.quadCurvedPathWithPoints(points: chartData.normalisedPoints,
+                                      step: CGPoint(x: 1.0, y: 1.0))
+    }
+
+    var comparisonPath: Path {
+        Path.quadCurvedPathWithPoints(points: comparisonChartData.normalisedPoints,
                                       step: CGPoint(x: 1.0, y: 1.0))
     }
     
@@ -31,6 +37,7 @@ public struct Line: View {
                                             style: style)
                 }
                 LineShapeView(chartData: chartData,
+                              comparisonChartData: comparisonChartData,
                               geometry: geometry,
                               style: style,
                               trimTo: didCellAppear ? 1.0 : 0.0)
@@ -103,8 +110,8 @@ struct Line_Previews: PreviewProvider {
 
     static var previews: some View {
         Group {
-            Line(chartData:  ChartData([8, 23, 32, 7, 23, -4]), style: blackLineStyle)
-            Line(chartData:  ChartData([8, 23, 32, 7, 23, 43]), style: redLineStyle)
+            Line(chartValue: ChartValue(), chartData:  ChartData([8, 23, 32, 7, 23, -4]), comparisonChartData: ChartData(), style: blackLineStyle)
+            Line(chartValue: ChartValue(), chartData:  ChartData([8, 23, 32, 7, 23, 43]), comparisonChartData: ChartData([3, 7, 18, 45, 60]), style: ChartStyle(backgroundColor: .clear, foregroundColor: .redBlack, comparisonColor: .green))
         }
     }
 }
