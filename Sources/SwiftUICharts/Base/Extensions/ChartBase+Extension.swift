@@ -15,7 +15,7 @@ extension View where Self: ChartBase {
 
     public func data(_ data: [Double], _ comparisonData: [Double]) -> some View {
         chartData.data = data.map { ("", $0, .accentColor) }
-        chartData.comparisonData = data.map { ("", $0, .accentColor) }
+        chartData.comparisonData = comparisonData.map { ("", $0, .accentColor) }
         return self
             .environmentObject(chartData)
             .environmentObject(ChartValue())
