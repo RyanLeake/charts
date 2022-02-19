@@ -12,22 +12,20 @@ extension View where Self: ChartBase {
             .environmentObject(ChartValue())
     }
 
-    public func data(_ data: [(String, Double, Color)]) -> some View {
-        chartData.data = data
+
+    public func data(_ data: [Double], _ comparisonData: [Double]) -> some View {
+        chartData.data = data.map { ("", $0, .accentColor) }
+        chartData.comparisonData = data.map { ("", $0, .accentColor) }
         return self
             .environmentObject(chartData)
             .environmentObject(ChartValue())
     }
-}
 
-extension View where Self: ComparativeChartBase {
-    public func data(_ data: [Double], _ comparisonData: [Double]) -> some View {
-        chartData.data = data.map { ("", $0, .accentColor) }
-        comparisonChartData.data = comparisonData.map { ("", $0, .accentColor) }
 
+    public func data(_ data: [(String, Double, Color)]) -> some View {
+        chartData.data = data
         return self
             .environmentObject(chartData)
-            .environmentObject(comparisonChartData)
             .environmentObject(ChartValue())
     }
 }

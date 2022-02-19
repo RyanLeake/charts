@@ -2,7 +2,6 @@ import SwiftUI
 
 struct LineShapeView: View, Animatable {
     var chartData: ChartData
-    var comparisonChartData: ChartData?
     var geometry: GeometryProxy
     var style: ChartStyle
     var trimTo: Double = 0
@@ -25,15 +24,14 @@ struct LineShapeView: View, Animatable {
                 .rotationEffect(.degrees(180), anchor: .center)
                 .rotation3DEffect(.degrees(180), axis: (x: 0, y: 1, z: 0))
 
-            if let comparisonChartData = comparisonChartData {
-                LineShape(data: comparisonChartData.normalisedPoints)
+                LineShape(data: chartData.comparisonNormalisedPoints)
                     .trim(from: 0, to: CGFloat(trimTo))
-                    .transform(CGAffineTransform(scaleX: geometry.size.width / CGFloat(comparisonChartData.normalisedPoints.count - 1),
-                                                 y: geometry.size.height / CGFloat(comparisonChartData.normalisedRange)))
+                    .transform(CGAffineTransform(scaleX: geometry.size.width / CGFloat(chartData.comparisonNormalisedPoints.count - 1),
+                                                 y: geometry.size.height / CGFloat(chartData.comparisonNormalisedRange)))
                     .stroke(style.comparisonColor ?? .gray, style: StrokeStyle(lineWidth: 3, lineJoin: .round))
                     .rotationEffect(.degrees(180), anchor: .center)
                     .rotation3DEffect(.degrees(180), axis: (x: 0, y: 1, z: 0))
-            }
+
         }
     }
 }

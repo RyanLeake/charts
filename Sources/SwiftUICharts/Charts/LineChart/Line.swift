@@ -4,7 +4,6 @@ import SwiftUI
 public struct Line: View {
     @ObservedObject var chartValue: ChartValue
     @ObservedObject var chartData: ChartData
-    @ObservedObject var comparisonChartData: ChartData
 
     var style: ChartStyle
 
@@ -19,10 +18,6 @@ public struct Line: View {
                                       step: CGPoint(x: 1.0, y: 1.0))
     }
 
-    var comparisonPath: Path {
-        Path.quadCurvedPathWithPoints(points: comparisonChartData.normalisedPoints,
-                                      step: CGPoint(x: 1.0, y: 1.0))
-    }
     
 	/// The content and behavior of the `Line`.
 	/// Draw the background if showing the full line (?) and the `showBackground` option is set. Above that draw the line, and then the data indicator if the graph is currently being touched.
@@ -37,7 +32,6 @@ public struct Line: View {
                                             style: style)
                 }
                 LineShapeView(chartData: chartData,
-                              comparisonChartData: comparisonChartData,
                               geometry: geometry,
                               style: style,
                               trimTo: didCellAppear ? 1.0 : 0.0)
@@ -110,8 +104,8 @@ struct Line_Previews: PreviewProvider {
 
     static var previews: some View {
         Group {
-            Line(chartValue: ChartValue(), chartData:  ChartData([8, 23, 32, 7, 23, -4]), comparisonChartData: ChartData(), style: blackLineStyle)
-            Line(chartValue: ChartValue(), chartData:  ChartData([8, 23, 32, 7, 23, 43]), comparisonChartData: ChartData([3, 7, 18, 45, 60]), style: ChartStyle(backgroundColor: .clear, foregroundColor: .redBlack, comparisonColor: .green))
+            Line(chartValue: ChartValue(), chartData:  ChartData([8, 23, 32, 7, 23, -4], [4, 15, 7, 7, 30, -9]), style: blackLineStyle)
+            Line(chartValue: ChartValue(), chartData:  ChartData([8, 23, 32, 7, 23, 43]), style: ChartStyle(backgroundColor: .clear, foregroundColor: .redBlack, comparisonColor: .green))
         }
     }
 }
