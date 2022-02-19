@@ -1,10 +1,11 @@
 import SwiftUI
 
 /// A type of chart that displays a line connecting the data points
-public struct LineChart: View, ChartBase {
+public struct LineChart: View, ComparativeChartBase {
     public var chartData = ChartData()
+    public var comparisonChartData = ChartData()
 
-    @EnvironmentObject var chartValue: ChartValue
+    @EnvironmentObject public var chartValue: ChartValue
     @EnvironmentObject var data: ChartData
     @EnvironmentObject var comparisonData: ChartData
     @EnvironmentObject var style: ChartStyle
