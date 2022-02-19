@@ -4,4 +4,6 @@ import SwiftUI
 public class ChartValue: ObservableObject {
     @Published public var currentValue: Double = 0
     @Published public var interactionInProgress: Bool = false
+
+    public init() {}
 }
