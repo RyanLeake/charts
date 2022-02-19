@@ -9,7 +9,7 @@ public struct Line: View {
 
     @State private var showIndicator: Bool = false
     @State private var touchLocation: CGPoint = .zero
-    @State private var showBackground: Bool = true
+    @State private var showBackground: Bool = false
     @State private var didCellAppear: Bool = false
 
     var curvedLines: Bool = true
