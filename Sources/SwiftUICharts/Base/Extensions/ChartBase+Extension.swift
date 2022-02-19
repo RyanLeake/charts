@@ -19,3 +19,15 @@ extension View where Self: ChartBase {
             .environmentObject(ChartValue())
     }
 }
+
+extension View where Self: ComparativeChartBase {
+    public func data(_ data: [Double], _ comparisonData: [Double]) -> some View {
+        chartData.data = data.map { ("", $0, .accentColor) }
+        comparisonChartData.data = comparisonData.map { ("", $0, .accentColor) }
+
+        return self
+            .environmentObject(chartData)
+            .environmentObject(comparisonChartData)
+            .environmentObject(ChartValue())
+    }
+}
