@@ -18,7 +18,6 @@ extension View where Self: ChartBase {
         chartData.comparisonData = comparisonData.map { ("", $0, .accentColor) }
         return self
             .environmentObject(chartData)
-            .environmentObject(ChartValue())
     }
 
 
