@@ -31,6 +31,7 @@ public struct LineChart: View, ChartBase {
             }
         }
     }
+    public init() {}
 }
 
 //struct TrendView: View {
