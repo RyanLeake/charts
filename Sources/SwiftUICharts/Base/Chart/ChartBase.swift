@@ -4,8 +4,3 @@ import SwiftUI
 public protocol ChartBase {
     var chartData: ChartData { get }
 }
-
-public protocol ComparativeChartBase {
-    var chartData: ChartData { get }
-    var comparisonChartData: ChartData { get }
-}

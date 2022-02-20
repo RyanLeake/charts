@@ -7,5 +7,5 @@ public enum ChartColors {
     public static let orangeDark = Color(hexString: "#EC2301")
 
     public static let legendColor: Color = Color(hexString: "#E8E7EA")
-    public static let indicatorKnob: Color = Color(hexString: "#FF57A6")
+    public static let indicatorKnob: Color = Color(hexString: "#FF7585")
 }

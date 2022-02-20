@@ -37,11 +37,11 @@ public struct Line: View {
                               trimTo: didCellAppear ? 1.0 : 0.0)
                     .animation(.easeIn)
                 if self.showIndicator {
-                    IndicatorPoint()
-                        .position(self.getClosestPointOnPath(geometry: geometry,
-                                                             touchLocation: self.touchLocation))
-                        .rotationEffect(.degrees(180), anchor: .center)
-                        .rotation3DEffect(.degrees(180), axis: (x: 0, y: 1, z: 0))
+                    IndicatorPoint(chartValue: chartValue)
+                            .position(self.getClosestPointOnPath(geometry: geometry,
+                                                                 touchLocation: self.touchLocation))
+                    .rotationEffect(.degrees(180), anchor: .center)
+                    .rotation3DEffect(.degrees(180), axis: (x: 0, y: 1, z: 0))
                 }
             }
             .onAppear {

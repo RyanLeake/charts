@@ -56,6 +56,16 @@ public class ChartData: ObservableObject {
         (comparisonPoints.min() ?? 0.0) < 0
     }
 
+    var maxPoint: Double {
+        let combinedData = points + comparisonPoints
+        return combinedData.max() ?? 0.0
+    }
+
+    var minPoint: Double {
+        let combinedData = points + comparisonPoints
+        return combinedData.min() ?? 0.0
+    }
+
     /// Initialize with data array
     /// - Parameter data: Array of `Double`
     public init(_ data: [Double]) {

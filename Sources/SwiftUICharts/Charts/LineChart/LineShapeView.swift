@@ -5,14 +5,23 @@ struct LineShapeView: View, Animatable {
     var geometry: GeometryProxy
     var style: ChartStyle
     var trimTo: Double = 0
-
+    
     var animatableData: CGFloat {
         get { CGFloat(trimTo) }
         set { trimTo = Double(newValue) }
     }
-
+    
     var body: some View {
         ZStack {
+            
+            LineShape(data: chartData.comparisonNormalisedPoints)
+                .trim(from: 0, to: CGFloat(trimTo))
+                .transform(CGAffineTransform(scaleX: geometry.size.width / CGFloat(chartData.comparisonNormalisedPoints.count - 1),
+                                             y: geometry.size.height / CGFloat(chartData.comparisonNormalisedRange)))
+                .stroke(style.comparisonColor ?? .gray, style: StrokeStyle(lineWidth: 3, lineJoin: .round))
+                .rotationEffect(.degrees(180), anchor: .center)
+                .rotation3DEffect(.degrees(180), axis: (x: 0, y: 1, z: 0))
+            
             LineShape(data: chartData.normalisedPoints)
                 .trim(from: 0, to: CGFloat(trimTo))
                 .transform(CGAffineTransform(scaleX: geometry.size.width / CGFloat(chartData.normalisedPoints.count - 1),
@@ -23,15 +32,6 @@ struct LineShapeView: View, Animatable {
                         style: StrokeStyle(lineWidth: 3, lineJoin: .round))
                 .rotationEffect(.degrees(180), anchor: .center)
                 .rotation3DEffect(.degrees(180), axis: (x: 0, y: 1, z: 0))
-
-                LineShape(data: chartData.comparisonNormalisedPoints)
-                    .trim(from: 0, to: CGFloat(trimTo))
-                    .transform(CGAffineTransform(scaleX: geometry.size.width / CGFloat(chartData.comparisonNormalisedPoints.count - 1),
-                                                 y: geometry.size.height / CGFloat(chartData.comparisonNormalisedRange)))
-                    .stroke(style.comparisonColor ?? .gray, style: StrokeStyle(lineWidth: 3, lineJoin: .round))
-                    .rotationEffect(.degrees(180), anchor: .center)
-                    .rotation3DEffect(.degrees(180), axis: (x: 0, y: 1, z: 0))
-
         }
     }
 }
