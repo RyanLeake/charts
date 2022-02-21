@@ -33,17 +33,16 @@ public struct Line: View {
                 }
 
                 ZStack {
-                    LineShapeView(chartData: chartData,
-                                  geometry: geometry,
-                                  style: style,
-                                  trimTo: didCellAppear ? 1.0 : 0.0)
-                        .animation(.easeIn)
                     CompareLineShapeView(chartData: chartData,
                                   geometry: geometry,
                                   style: style,
                                   trimTo: didCellAppear ? 1.0 : 0.0)
                         .animation(.easeIn)
-
+                    LineShapeView(chartData: chartData,
+                                  geometry: geometry,
+                                  style: style,
+                                  trimTo: didCellAppear ? 1.0 : 0.0)
+                        .animation(.easeIn)
                 }
                 if self.showIndicator {
                     IndicatorPoint(chartValue: chartValue)
