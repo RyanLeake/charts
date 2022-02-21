@@ -31,11 +31,20 @@ public struct Line: View {
                                             geometry: geometry,
                                             style: style)
                 }
-                LineShapeView(chartData: chartData,
-                              geometry: geometry,
-                              style: style,
-                              trimTo: didCellAppear ? 1.0 : 0.0)
-                    .animation(.easeIn)
+
+                ZStack {
+                    LineShapeView(chartData: chartData,
+                                  geometry: geometry,
+                                  style: style,
+                                  trimTo: didCellAppear ? 1.0 : 0.0)
+                        .animation(.easeIn)
+                    CompareLineShapeView(chartData: chartData,
+                                  geometry: geometry,
+                                  style: style,
+                                  trimTo: didCellAppear ? 1.0 : 0.0)
+                        .animation(.easeIn)
+
+                }
                 if self.showIndicator {
                     IndicatorPoint(chartValue: chartValue)
                             .position(self.getClosestPointOnPath(geometry: geometry,
@@ -104,7 +113,10 @@ struct Line_Previews: PreviewProvider {
 
     static var previews: some View {
         Group {
-            Line(chartValue: ChartValue(), chartData:  ChartData([8, 23, 32, 7, 23, -4], [4, 15, 7, 7, 30, -9]), style: blackLineStyle)
+
+
+
+            Line(chartValue: ChartValue(), chartData:  ChartData([2650.0, 2650.0, 2650.0, 2650.0, 2650.0, 2650, 2500, 2500, 1400], [2650.0, 2650.0, 2750.0, 2650.0, 2560.0, 2650.0, 2650]), style: blackLineStyle)
             Line(chartValue: ChartValue(), chartData:  ChartData([8, 23, 32, 7, 23, 43]), style: ChartStyle(backgroundColor: .clear, foregroundColor: .redBlack, comparisonColor: .green))
         }
     }

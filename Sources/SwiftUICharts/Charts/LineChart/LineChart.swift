@@ -36,8 +36,8 @@ public struct LineChart: View, ChartBase {
 
 //struct TrendView: View {
 //
-//    var demoData: [Double] = [8, 2, 4, 6, 12, 9, 2]
-//    var demoDataComparison: [Double] = [1, 2, 20, 30, 40, 60, 60]
+//    var demoData: [Double] = [2650.0, 2650.0, 2650.0, 2650.0, 2650.0, 2650.0]
+//    var demoDataComparison: [Double] = [2650.0, 2650.0, 2750.0, 2650.0, 1.0, 2650.0, 3400.0]
 //
 //    @ObservedObject var chartValue = ChartValue()
 //

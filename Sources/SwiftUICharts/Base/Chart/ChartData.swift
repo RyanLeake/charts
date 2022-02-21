@@ -13,12 +13,11 @@ public class ChartData: ObservableObject {
         comparisonData.map { $0.1 }
     }
 
-
     var values: [String] {
         data.map { $0.0 }
     }
 
-    var comparisonCalues: [String] {
+    var comparisonValues: [String] {
         comparisonData.map { $0.0 }
     }
 
@@ -28,6 +27,11 @@ public class ChartData: ObservableObject {
 
     var comparisonColors: [Color] {
         comparisonData.map { $0.2 }
+    }
+
+    var unifiedNormalisedPoints: [Double] {
+        let absolutePoints = (points.map { abs($0) } + comparisonPoints.map { abs($0) })
+        return (points.map { $0 / (absolutePoints.max() ?? 1.0) } + comparisonPoints.map { $0 / (absolutePoints.max() ?? 1.0) })
     }
 
     var normalisedPoints: [Double] {
@@ -41,11 +45,7 @@ public class ChartData: ObservableObject {
     }
 
     var normalisedRange: Double {
-        (normalisedPoints.max() ?? 0.0) - (normalisedPoints.min() ?? 0.0)
-    }
-
-    var comparisonNormalisedRange: Double {
-        (comparisonNormalisedPoints.max() ?? 0.0) - (comparisonNormalisedPoints.min() ?? 0.0)
+        (unifiedNormalisedPoints.max() ?? 0.0) - (unifiedNormalisedPoints.min() ?? 0.0)
     }
 
     var isInNegativeDomain: Bool {
