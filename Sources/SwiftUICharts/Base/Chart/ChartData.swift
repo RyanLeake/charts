@@ -29,19 +29,23 @@ public class ChartData: ObservableObject {
         comparisonData.map { $0.2 }
     }
 
+    var allPoints: [Double] {
+        return points + comparisonPoints
+    }
+
     var unifiedNormalisedPoints: [Double] {
-        let absolutePoints = (points.map { abs($0) } + comparisonPoints.map { abs($0) })
-        return (points.map { $0 / (absolutePoints.max() ?? 1.0) } + comparisonPoints.map { $0 / (absolutePoints.max() ?? 1.0) })
+        let absolutePoints = allPoints.map { abs($0) }
+        return absolutePoints.map { $0 / (allPoints.max() ?? 1.0) }
     }
 
     var normalisedPoints: [Double] {
         let absolutePoints = points.map { abs($0) }
-        return points.map { $0 / (absolutePoints.max() ?? 1.0) }
+        return absolutePoints.map { $0 / (allPoints.max() ?? 1.0) }
     }
 
     var comparisonNormalisedPoints: [Double] {
         let absolutePoints = comparisonPoints.map { abs($0) }
-        return comparisonPoints.map { $0 / (absolutePoints.max() ?? 1.0) }
+        return absolutePoints.map { $0 / (allPoints.max() ?? 1.0) }
     }
 
     var normalisedRange: Double {

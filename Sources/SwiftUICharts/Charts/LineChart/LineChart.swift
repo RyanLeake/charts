@@ -18,12 +18,12 @@ public struct LineChart: View, ChartBase {
             HStack {
                 Spacer()
                 VStack {
-                    Text(String(data.maxPoint))
+                    Text(String(data.maxPoint.formatted()))
                         .opacity(0.5)
                         .font(.system(size: 12))
                         .offset(x: 0, y: -20)
                     Spacer()
-                    Text(String(data.minPoint))
+                    Text(String(data.minPoint.formatted()))
                         .opacity(0.5)
                         .font(.system(size: 12))
                         .offset(x: 0, y: 20)
@@ -36,8 +36,8 @@ public struct LineChart: View, ChartBase {
 
 //struct TrendView: View {
 //
-//    var demoData: [Double] = [2650.0, 2650.0, 2650.0, 2650.0, 2650.0, 2650.0]
-//    var demoDataComparison: [Double] = [2650.0, 2650.0, 2750.0, 2650.0, 1.0, 2650.0, 3400.0]
+//    var demoData: [Double] = [1, 2, 2, 2, 2]
+//    var demoDataComparison: [Double] = [1, 1, 1, 1, 2]
 //
 //    @ObservedObject var chartValue = ChartValue()
 //
