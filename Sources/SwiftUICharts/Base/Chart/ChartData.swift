@@ -33,24 +33,39 @@ public class ChartData: ObservableObject {
         return points + comparisonPoints
     }
 
+    var pointAverage: Double {
+        let sumArray = points.reduce(0, +) + comparisonPoints.reduce(0, +)
+        return sumArray / (Double(points.count) + Double(comparisonPoints.count))
+    }
+
+    var comparisonPointAverage: Double {
+        let sumArray = comparisonPoints.reduce(0, +)
+        return sumArray / Double(comparisonPoints.count)
+    }
+
     var unifiedNormalisedPoints: [Double] {
         let absolutePoints = allPoints.map { abs($0) }
-        return absolutePoints.map { $0 / (allPoints.max() ?? 1.0) }
+        return absolutePoints.map { $0 / (absolutePoints.max() ?? 1.0) }
     }
 
     var normalisedPoints: [Double] {
         let absolutePoints = points.map { abs($0) }
-        return absolutePoints.map { $0 / (allPoints.max() ?? 1.0) }
+        return absolutePoints.map { $0 / pointAverage}
     }
 
     var comparisonNormalisedPoints: [Double] {
         let absolutePoints = comparisonPoints.map { abs($0) }
-        return absolutePoints.map { $0 / (allPoints.max() ?? 1.0) }
+        return absolutePoints.map { $0 / pointAverage}
     }
 
     var normalisedRange: Double {
-        (unifiedNormalisedPoints.max() ?? 0.0) - (unifiedNormalisedPoints.min() ?? 0.0)
+        (normalisedPoints.max() ?? 0.0) - (normalisedPoints.min() ?? 0.0)
     }
+
+    var comparisonNormalisedRange: Double {
+        (comparisonNormalisedPoints.max() ?? 0.0) - (comparisonNormalisedPoints.min() ?? 0.0)
+    }
+
 
     var isInNegativeDomain: Bool {
         (points.min() ?? 0.0) < 0

@@ -115,7 +115,7 @@ struct Line_Previews: PreviewProvider {
 
 
 
-            Line(chartValue: ChartValue(), chartData:  ChartData([1, 5, 3, 4, 8], [5, 2, 4, 6, 8]), style: blackLineStyle)
+            Line(chartValue: ChartValue(), chartData:  ChartData([855, 2327, 2057, 2147, 764, 1543], [2319, 1534, 2035, 2271, 2134]), style: blackLineStyle)
 
         }
     }
