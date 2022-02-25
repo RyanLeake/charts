@@ -12,7 +12,7 @@ struct LineShapeView: View, Animatable {
     }
     
     var body: some View {
-        LineShape(data: chartData.normalisedPoints)
+        LineShape(data: chartData)
             .trim(from: 0, to: CGFloat(trimTo))
             .transform(CGAffineTransform(scaleX: geometry.size.width / CGFloat(chartData.normalisedPoints.count - 1),
                                          y: geometry.size.height / CGFloat(chartData.normalisedRange)))
@@ -37,7 +37,7 @@ struct CompareLineShapeView: View, Animatable {
     }
 
     var body: some View {
-        LineShape(data: chartData.comparisonNormalisedPoints)
+        LineShapeComparison(data: chartData)
             .trim(from: 0, to: CGFloat(trimTo))
             .transform(CGAffineTransform(scaleX: geometry.size.width / CGFloat(chartData.comparisonNormalisedPoints.count - 1),
                                          y: geometry.size.height / CGFloat(chartData.comparisonNormalisedRange)))

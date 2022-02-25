@@ -14,7 +14,12 @@ public struct Line: View {
 
     var curvedLines: Bool = true
     var path: Path {
-        Path.quadCurvedPathWithPoints(points: chartData.normalisedPoints,
+        Path.quadCurvedPathWithPoints(data: chartData,
+                                      step: CGPoint(x: 1.0, y: 1.0))
+    }
+
+    var pathComparison: Path {
+        Path.quadCurvedPathWithPointsComparison(data: chartData,
                                       step: CGPoint(x: 1.0, y: 1.0))
     }
 
@@ -32,7 +37,7 @@ public struct Line: View {
                                             style: style)
                 }
 
-                ZStack {
+                ZStack(alignment: .center) {
                     CompareLineShapeView(chartData: chartData,
                                   geometry: geometry,
                                   style: style,

@@ -133,17 +133,42 @@ extension Path {
 	///   - step: <#step description#>
 	///   - globalOffset: <#globalOffset description#>
 	/// - Returns: <#description#>
-    static func quadCurvedPathWithPoints(points: [Double], step: CGPoint, globalOffset: Double? = nil) -> Path {
+    static func quadCurvedPathWithPoints(data: ChartData, step: CGPoint, globalOffset: Double? = nil) -> Path {
         var path = Path()
-        if points.count < 2 {
+        if data.normalisedPoints.count < 2 {
             return path
         }
-        let offset = globalOffset ?? points.min()!
+        let offset = globalOffset ?? data.unifiedNormalisedPoints.min()!
 //        guard let offset = points.min() else { return path }
-        var point1 = CGPoint(x: 0, y: CGFloat(points[0]-offset)*step.y)
+        var point1 = CGPoint(x: 0, y: CGFloat(data.normalisedPoints[0]-offset)*step.y)
         path.move(to: point1)
-        for pointIndex in 1..<points.count {
-            let point2 = CGPoint(x: step.x * CGFloat(pointIndex), y: step.y*CGFloat(points[pointIndex]-offset))
+        for pointIndex in 1..<data.normalisedPoints.count {
+            let point2 = CGPoint(x: step.x * CGFloat(pointIndex), y: step.y*CGFloat(data.normalisedPoints[pointIndex]-offset))
+            let midPoint = CGPoint.midPointForPoints(firstPoint: point1, secondPoint: point2)
+            path.addQuadCurve(to: midPoint, control: CGPoint.controlPointForPoints(firstPoint: midPoint, secondPoint: point1))
+            path.addQuadCurve(to: point2, control: CGPoint.controlPointForPoints(firstPoint: midPoint, secondPoint: point2))
+            point1 = point2
+        }
+        return path
+    }
+
+    /// <#Description#>
+    /// - Parameters:
+    ///   - points: <#points description#>
+    ///   - step: <#step description#>
+    ///   - globalOffset: <#globalOffset description#>
+    /// - Returns: <#description#>
+    static func quadCurvedPathWithPointsComparison(data: ChartData, step: CGPoint, globalOffset: Double? = nil) -> Path {
+        var path = Path()
+        if data.normalisedPoints.count < 2 {
+            return path
+        }
+        let offset = globalOffset ?? data.unifiedNormalisedPoints.min()!
+//        guard let offset = points.min() else { return path }
+        var point1 = CGPoint(x: 0, y: CGFloat(data.comparisonNormalisedPoints[0]-offset)*step.y)
+        path.move(to: point1)
+        for pointIndex in 1..<data.comparisonNormalisedPoints.count {
+            let point2 = CGPoint(x: step.x * CGFloat(pointIndex), y: step.y*CGFloat(data.comparisonNormalisedPoints[pointIndex]-offset))
             let midPoint = CGPoint.midPointForPoints(firstPoint: point1, secondPoint: point2)
             path.addQuadCurve(to: midPoint, control: CGPoint.controlPointForPoints(firstPoint: midPoint, secondPoint: point1))
             path.addQuadCurve(to: point2, control: CGPoint.controlPointForPoints(firstPoint: midPoint, secondPoint: point2))
